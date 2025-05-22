@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Öğrenci Düzenle{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-user-edit text-primary me-2"></i>Öğrenci Düzenle</h2>
+    <a href="{{ url_for('ogrenciler') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left me-1"></i>Geri Dön
+    </a>
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('ogrenci_duzenle', id=ogrenci.id) }}">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="ad" class="form-label">Ad</label>
+                    <input type="text" class="form-control" id="ad" name="ad" value="{{ ogrenci.ad }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="soyad" class="form-label">Soyad</label>
+                    <input type="text" class="form-control" id="soyad" name="soyad" value="{{ ogrenci.soyad }}" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="yas" class="form-label">Yaş</label>
+                    <input type="number" class="form-control" id="yas" name="yas" value="{{ ogrenci.yas }}" min="6" max="30" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="sinif" class="form-label">Sınıf</label>
+                    <input type="text" class="form-control" id="sinif" name="sinif" value="{{ ogrenci.sinif }}" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="telefon" class="form-label">Telefon</label>
+                    <input type="tel" class="form-control" id="telefon" name="telefon" value="{{ ogrenci.telefon }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label">E-posta</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ ogrenci.email }}" required>
+                </div>
+            </div>
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-1"></i>Değişiklikleri Kaydet
+                </button>
+                <a href="{{ url_for('ogrenciler') }}" class="btn btn-secondary ms-2">
+                    <i class="fas fa-times me-1"></i>İptal
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
