@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Öğrenciler{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-users text-primary me-2"></i>Öğrenciler</h2>
+    {% if session.get('rol') == 'yonetici' %}
+    <a href="{{ url_for('ogrenci_ekle') }}" class="btn btn-success">
+        <i class="fas fa-plus me-1"></i>Yeni Öğrenci
+    </a>
+    {% endif %}
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-primary">
+                    <tr>
+                        <th>#</th>
+                        <th>Ad Soyad</th>
+                        <th>Yaş</th>
+                        <th>Sınıf</th>
+                        <th>Telefon</th>
+                        <th>E-posta</th>
+                        {% if session.get('rol') == 'yonetici' %}
+                        <th class="text-center">İşlemler</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ogrenci in ogrenciler %}
+                    <tr>
+                        <td>{{ ogrenci.id }}</td>
+                        <td>{{ ogrenci.ad }} {{ ogrenci.soyad }}</td>
+                        <td>{{ ogrenci.yas }}</td>
+                        <td>{{ ogrenci.sinif }}</td>
+                        <td>{{ ogrenci.telefon }}</td>
+                        <td>{{ ogrenci.email }}</td>
+                        {% if session.get('rol') == 'yonetici' %}
+                        <td class="text-center">
+                            <a href="{{ url_for('ogrenci_duzenle', id=ogrenci.id) }}" class="btn btn-sm btn-warning me-1">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="{{ url_for('ogrenci_sil', id=ogrenci.id) }}" class="btn btn-sm btn-danger" 
+                               onclick="return confirm('Bu öğrenciyi silmek istediğinize emin misiniz?')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center">Henüz kayıtlı öğrenci bulunmamaktadır.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

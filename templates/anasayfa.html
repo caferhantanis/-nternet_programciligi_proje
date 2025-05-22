@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}Ana Sayfa{% endblock %}
+
+{% block content %}
+<div class="jumbotron bg-light p-4 rounded shadow-sm">
+    <h1 class="display-5">
+        <i class="fas fa-school me-2 text-primary"></i>
+        Öğrenci Bilgi Sistemine Hoş Geldiniz
+    </h1>
+    <p class="lead">Bu sistem üzerinden öğrenci, ders ve not bilgilerini yönetebilirsiniz.</p>
+    <hr class="my-4">
+    
+    {% if rol == 'yonetici' %}
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card text-center mb-4">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="fas fa-users text-primary mb-3 fa-2x"></i></h3>
+                    <h5 class="card-subtitle mb-2">Öğrenci Yönetimi</h5>
+                    <p class="card-text">Öğrenci kayıtlarını görüntüleyin, ekleyin, düzenleyin ve silin.</p>
+                    <a href="{{ url_for('ogrenciler') }}" class="btn btn-primary">
+                        <i class="fas fa-arrow-right me-1"></i>Öğrencilere Git
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center mb-4">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="fas fa-book text-primary mb-3 fa-2x"></i></h3>
+                    <h5 class="card-subtitle mb-2">Ders Yönetimi</h5>
+                    <p class="card-text">Dersleri görüntüleyin, ekleyin, düzenleyin ve silin.</p>
+                    <a href="{{ url_for('dersler') }}" class="btn btn-primary">
+                        <i class="fas fa-arrow-right me-1"></i>Derslere Git
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center mb-4">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="fas fa-chart-bar text-primary mb-3 fa-2x"></i></h3>
+                    <h5 class="card-subtitle mb-2">İstatistikler</h5>
+                    <p class="card-text">Öğrenci ve ders bazında not ortalamalarını ve istatistikleri görüntüleyin.</p>
+                    <a href="{{ url_for('istatistikler') }}" class="btn btn-primary">
+                        <i class="fas fa-arrow-right me-1"></i>İstatistiklere Git
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% elif rol == 'ogretmen' %}
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card text-center mb-4">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="fas fa-users text-primary mb-3 fa-2x"></i></h3>
+                    <h5 class="card-subtitle mb-2">Öğrenciler</h5>
+                    <p class="card-text">Öğrenci kayıtlarını görüntüleyin ve filtreleyebilirsiniz.</p>
+                    <a href="{{ url_for('ogrenciler') }}" class="btn btn-primary">
+                        <i class="fas fa-arrow-right me-1"></i>Öğrencilere Git
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center mb-4">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="fas fa-clipboard-list text-primary mb-3 fa-2x"></i></h3>
+                    <h5 class="card-subtitle mb-2">Not Yönetimi</h5>
+                    <p class="card-text">Notları görüntüleyin, ekleyin, düzenleyin ve silin.</p>
+                    <a href="{{ url_for('notlar') }}" class="btn btn-primary">
+                        <i class="fas fa-arrow-right me-1"></i>Notlara Git
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center mb-4">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="fas fa-chart-bar text-primary mb-3 fa-2x"></i></h3>
+                    <h5 class="card-subtitle mb-2">İstatistikler</h5>
+                    <p class="card-text">Öğrenci ve ders bazında not ortalamalarını ve istatistikleri görüntüleyin.</p>
+                    <a href="{{ url_for('istatistikler') }}" class="btn btn-primary">
+                        <i class="fas fa-arrow-right me-1"></i>İstatistiklere Git
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% elif rol == 'ogrenci' %}
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card text-center mb-4">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="fas fa-clipboard-list text-primary mb-3 fa-2x"></i></h3>
+                    <h5 class="card-subtitle mb-2">Notlarım</h5>
+                    <p class="card-text">Tüm derslerinizin not bilgilerini ve ortalamalarını görüntüleyin.</p>
+                    <a href="{{ url_for('notlar') }}" class="btn btn-primary">
+                        <i class="fas fa-arrow-right me-1"></i>Notlara Git
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card text-center mb-4">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="fas fa-user-circle text-primary mb-3 fa-2x"></i></h3>
+                    <h5 class="card-subtitle mb-2">Profilim</h5>
+                    <p class="card-text">Kişisel bilgilerinizi ve hesap ayarlarınızı görüntüleyin.</p>
+                    <a href="{{ url_for('profil') }}" class="btn btn-primary">
+                        <i class="fas fa-arrow-right me-1"></i>Profile Git
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

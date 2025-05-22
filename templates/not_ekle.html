@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Not Ekle{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-plus-square text-primary me-2"></i>Not Ekle</h2>
+    <a href="{{ url_for('notlar') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left me-1"></i>Geri Dön
+    </a>
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('not_ekle') }}">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="ogrenci_id" class="form-label">Öğrenci</label>
+                    <select class="form-select" id="ogrenci_id" name="ogrenci_id" required>
+                        <option value="" selected disabled>-- Öğrenci Seçin --</option>
+                        {% for ogrenci in ogrenciler %}
+                        <option value="{{ ogrenci.id }}">{{ ogrenci.ad }} {{ ogrenci.soyad }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="ders_id" class="form-label">Ders</label>
+                    <select class="form-select" id="ders_id" name="ders_id" required>
+                        <option value="" selected disabled>-- Ders Seçin --</option>
+                        {% for ders in dersler %}
+                        <option value="{{ ders.id }}">{{ ders.ad }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="deger" class="form-label">Not Değeri</label>
+                    <input type="number" class="form-control" id="deger" name="deger" min="0" max="100" step="0.01" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="aciklama" class="form-label">Açıklama</label>
+                    <input type="text" class="form-control" id="aciklama" name="aciklama" placeholder="Örnek: 1. Sınav, Final, Proje vb.">
+                </div>
+            </div>
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-1"></i>Kaydet
+                </button>
+                <a href="{{ url_for('notlar') }}" class="btn btn-secondary ms-2">
+                    <i class="fas fa-times me-1"></i>İptal
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
