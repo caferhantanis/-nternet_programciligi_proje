@@ -1,3 +1,4 @@
+from flask import jsonify
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
@@ -415,6 +416,73 @@ def profil():
     return render_template('profil.html', kullanici=kullanici)
 
 # Uygulama başlangıcı
+if __name__ == '__main__':
+    if not os.path.exists('instance'):
+        os.makedirs('instance')
+    veritabani_olustur()
+    app.run(debug=True, host='0.0.0.0', port=5000)
+
+# ... mevcut kodun sonundaki route'ların hemen altında ekle
+
+from flask import jsonify
+
+@app.route('/api/ogrenciler')
+@login_required(roles=['yonetici', 'ogretmen'])
+def api_ogrenciler():
+    ogrenciler = Ogrenci.query.all()
+    data = []
+    for o in ogrenciler:
+        data.append({
+            'id': o.id,
+            'ad': o.ad,
+            'soyad': o.soyad,
+            'yas': o.yas,
+            'sinif': o.sinif,
+            'telefon': o.telefon,
+            'email': o.email,
+            'kullanici_id': o.kullanici_id
+        })
+    return jsonify(data)
+
+@app.route('/api/dersler')
+@login_required(roles=['yonetici', 'ogretmen'])
+def api_dersler():
+    dersler = Ders.query.all()
+    data = []
+    for d in dersler:
+        data.append({
+            'id': d.id,
+            'ad': d.ad,
+            'ogretmen_id': d.ogretmen_id,
+            'not_ortalamasi': d.not_ortalamasi
+        })
+    return jsonify(data)
+
+@app.route('/api/notlar')
+@login_required(roles=['yonetici', 'ogretmen', 'ogrenci'])
+def api_notlar():
+    if session['rol'] == 'ogrenci':
+        ogrenci = Ogrenci.query.filter_by(kullanici_id=session['kullanici_id']).first()
+        if ogrenci:
+            notlar = Not.query.filter_by(ogrenci_id=ogrenci.id).all()
+        else:
+            notlar = []
+    else:
+        notlar = Not.query.all()
+
+    data = []
+    for n in notlar:
+        data.append({
+            'id': n.id,
+            'ogrenci_id': n.ogrenci_id,
+            'ders_id': n.ders_id,
+            'deger': n.deger,
+            'aciklama': n.aciklama
+        })
+    return jsonify(data)
+
+
+# if __name__ == '__main__' bloğu burada devam eder
 if __name__ == '__main__':
     if not os.path.exists('instance'):
         os.makedirs('instance')
