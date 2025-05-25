@@ -60,6 +60,33 @@ python app.py
 Uygulama varsayılan olarak tarayıcınızda [http://127.0.0.1:5000/](http://127.0.0.1:5000/) adresinde çalışacaktır.
 
 ---
+📦ogrenci_bilgi_sistemi/
+├── app.py                            # Ana Flask uygulama dosyası
+├── instance/
+│   └── okul.db                       # SQLite veritabanı dosyası
+├── static/
+│   ├── css/
+│   │   └── style.css                 # Stil dosyaları
+│   └── js/                           # (Varsa) JavaScript dosyaları
+├── templates/
+│   ├── base.html                     # Tüm sayfalar için temel şablon
+│   ├── giris.html                    # Login sayfası
+│   ├── anasayfa.html                 # Kullanıcı paneli / dashboard
+│   ├── profil.html
+│   ├── dersler.html
+│   ├── ders_ekle.html
+│   ├── ders_duzenle.html
+│   ├── ogrenciler.html
+│   ├── ogrenci_ekle.html
+│   ├── ogrenci_duzenle.html
+│   ├── notlar.html
+│   ├── not_ekle.html
+│   ├── not_duzenle.html
+│   └── istatistikler.html
+├── veritabani.json                   # (İsteğe bağlı) veri yedeği veya yapılandırması
+├── requirements.txt                  # Gerekli pip paketleri (Flask vs.)
+└── README.md                         # Proje açıklaması
+
 
 
 ```
