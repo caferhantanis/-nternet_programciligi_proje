@@ -1,0 +1,86 @@
+{
+    "kullanicilar": [
+        {
+            "id": 1,
+            "kullanici_adi": "admin",
+            "rol": "yonetici"
+        },
+        {
+            "id": 2,
+            "kullanici_adi": "ogretmen",
+            "rol": "ogretmen"
+        },
+        {
+            "id": 3,
+            "kullanici_adi": "ogrenci",
+            "rol": "ogrenci"
+        },
+        {
+            "id": 6,
+            "kullanici_adi": "cafer",
+            "rol": "ogrenci"
+        }
+    ],
+    "ogrenciler": [
+        {
+            "id": 1,
+            "ad": "Ali",
+            "soyad": "Yılmaz",
+            "yas": 15,
+            "sinif": "9-A",
+            "telefon": "555-123-4567",
+            "email": "ali.yilmaz@okul.com",
+            "kullanici_id": 3
+        },
+        {
+            "id": 4,
+            "ad": "cafer",
+            "soyad": "tanış",
+            "yas": 23,
+            "sinif": "1",
+            "telefon": "05313727272",
+            "email": "caferhan34@gmail.com",
+            "kullanici_id": 6
+        }
+    ],
+    "dersler": [
+        {
+            "id": 1,
+            "ad": "Matematik",
+            "ogretmen_id": 2
+        },
+        {
+            "id": 2,
+            "ad": "Fizik",
+            "ogretmen_id": 2
+        },
+        {
+            "id": 3,
+            "ad": "pc",
+            "ogretmen_id": 2
+        }
+    ],
+    "notlar": [
+        {
+            "id": 1,
+            "ogrenci_id": 1,
+            "ders_id": 1,
+            "deger": 85.0,
+            "aciklama": "1. Sınav"
+        },
+        {
+            "id": 2,
+            "ogrenci_id": 1,
+            "ders_id": 2,
+            "deger": 90.0,
+            "aciklama": "1. Sınav"
+        },
+        {
+            "id": 4,
+            "ogrenci_id": 4,
+            "ders_id": 3,
+            "deger": 0.01,
+            "aciklama": "vize"
+        }
+    ]
+}
